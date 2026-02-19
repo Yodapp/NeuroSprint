@@ -1,17 +1,15 @@
+# NeuroSprint v3 🧠
 
-# NeuroSprint 🧠
+Ny version med:
+- 🌿 Gentle Mode
+- 🔥 Combo-system
+- 🎨 App-lik design
+- 📱 Installera som app (PWA)
 
-A simple brain workout game designed for:
-- Stroke survivors
-- Elderly users
-- Anyone wanting a quick cognitive boost
+## Installera som app (iPhone)
 
-## How to Deploy on GitHub Pages
+1. Öppna sidan i Safari
+2. Tryck på Dela-knappen
+3. Välj "Lägg till på hemskärmen"
 
-1. Create a new public repository on GitHub.
-2. Upload these files to the root of the repository.
-3. Go to Settings → Pages.
-4. Deploy from the main branch.
-5. Your game will be live!
-
-Enjoy!
+Nu fungerar den som en riktig app.

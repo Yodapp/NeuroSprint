@@ -1,44 +1,62 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
-    <meta charset="UTF-8">
-    <title>NeuroSprint – Brain Workout</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NeuroSprint</title>
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#4CAF50">
+
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="app">
-        <h1>🧠 NeuroSprint</h1>
 
-        <div id="instructions">
-            <h2>How To Play</h2>
-            <p>You will see a COLOR on the screen.</p>
-            <p>If the color is <b>GREEN</b> → Tap the LEFT button.</p>
-            <p>If the color is <b>BLUE</b> → Tap the RIGHT button.</p>
-            <p>Try to be fast and accurate!</p>
-            <p>The game lasts 60 seconds.</p>
-            <button id="startBtn">Start Game</button>
+<div class="app">
+
+    <h1>🧠 NeuroSprint</h1>
+    <p class="subtitle">Hjärnträning för fokus & reaktion</p>
+
+    <div id="menu">
+        <label class="toggle">
+            <input type="checkbox" id="gentleToggle">
+            <span>🌿 Gentle Mode (ingen minuspoäng, lugnare tempo)</span>
+        </label>
+        <button id="startBtn" class="primary">Starta</button>
+    </div>
+
+    <div id="game" class="hidden">
+        <div class="topbar">
+            <div id="timer">Tid: 60</div>
+            <div id="score">Poäng: 0</div>
         </div>
 
-        <div id="game" class="hidden">
-            <div id="timer">Time: 60</div>
-            <div id="score">Score: 0</div>
-            <div id="stimulus">GREEN</div>
-            <div class="buttons">
-                <button id="leftBtn">LEFT</button>
-                <button id="rightBtn">RIGHT</button>
-            </div>
-        </div>
+        <div id="combo" class="combo hidden">🔥 5 i rad!</div>
 
-        <div id="result" class="hidden">
-            <h2>Game Over</h2>
-            <p id="finalScore"></p>
-            <p id="highScore"></p>
-            <button id="restartBtn">Play Again</button>
+        <div id="stimulus">GRÖN</div>
+
+        <div class="buttons">
+            <button id="leftBtn" class="action left">VÄNSTER</button>
+            <button id="rightBtn" class="action right">HÖGER</button>
         </div>
     </div>
 
-    <script src="game.js"></script>
+    <div id="result" class="hidden">
+        <h2>Slut!</h2>
+        <p id="finalScore"></p>
+        <p id="highScore"></p>
+        <button id="restartBtn" class="primary">Spela igen</button>
+    </div>
+
+</div>
+
+<script src="game.js"></script>
+
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js');
+}
+</script>
+
 </body>
 </html>

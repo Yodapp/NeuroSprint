@@ -1,47 +1,79 @@
-
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f4f7fb;
     margin: 0;
-    padding: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(135deg, #6dd5ed, #2193b0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-h1 {
-    font-size: 2em;
+.app {
+    background: white;
+    width: 95%;
+    max-width: 420px;
+    padding: 25px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+}
+
+.subtitle {
+    color: #666;
 }
 
 button {
-    font-size: 1.2em;
-    padding: 15px 25px;
-    margin: 10px;
-    border-radius: 10px;
+    padding: 16px;
+    font-size: 1.1em;
+    border-radius: 14px;
     border: none;
+    margin: 10px;
+    cursor: pointer;
 }
 
-#leftBtn {
-    background-color: #e0e0e0;
-}
-
-#rightBtn {
-    background-color: #e0e0e0;
-}
-
-#startBtn, #restartBtn {
-    background-color: #4CAF50;
+.primary {
+    width: 100%;
+    background: #4CAF50;
     color: white;
 }
 
+.action {
+    width: 45%;
+    font-weight: bold;
+}
+
+.left { background: #e3f2fd; }
+.right { background: #e8f5e9; }
+
 #stimulus {
     font-size: 3em;
+    font-weight: bold;
     margin: 30px 0;
+    transition: transform 0.2s ease;
 }
 
-.hidden {
-    display: none;
-}
-
-.buttons {
+.topbar {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    font-weight: bold;
+}
+
+.hidden { display: none; }
+
+.combo {
+    font-size: 1.2em;
+    color: #ff5722;
+    animation: pop 0.6s ease;
+}
+
+@keyframes pop {
+    0% { transform: scale(0.5); opacity: 0; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+.toggle {
+    display: block;
+    margin-bottom: 20px;
+    font-size: 0.95em;
 }
