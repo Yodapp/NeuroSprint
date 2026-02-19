@@ -1,89 +1,69 @@
-
-const startBtn = document.getElementById("startBtn");
-const restartBtn = document.getElementById("restartBtn");
-const installBtn = document.getElementById("installBtn");
-
-const menu = document.getElementById("menu");
-const game = document.getElementById("game");
-const result = document.getElementById("result");
-
-const scoreEl = document.getElementById("score");
-const finalScoreEl = document.getElementById("finalScore");
-const reactionEl = document.getElementById("reaction");
-const bestReactionEl = document.getElementById("bestReaction");
-
-const leftZone = document.getElementById("leftZone");
-const rightZone = document.getElementById("rightZone");
-const symbolEl = document.getElementById("symbol");
-
 let score = 0;
-let timeLeft = 60;
-let interval;
-let currentSymbol = "●";
+let round = 0;
+let totalRounds = 20;
 let startTime;
 let reactionTimes = [];
 
-function randomSymbol() {
-    currentSymbol = Math.random() < 0.5 ? "●" : "■";
-    symbolEl.textContent = currentSymbol;
-    startTime = Date.now();
+function showScreen(id) {
+document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+document.getElementById(id).classList.add('active');
 }
 
 function startGame() {
-    score = 0;
-    reactionTimes = [];
-    timeLeft = 60;
-
-    menu.classList.add("hidden");
-    result.classList.add("hidden");
-    game.classList.remove("hidden");
-
-    scoreEl.textContent = "0";
-    randomSymbol();
-
-    interval = setInterval(() => {
-        timeLeft--;
-        if (timeLeft <= 0) endGame();
-    }, 1000);
+score = 0;
+round = 0;
+reactionTimes = [];
+document.getElementById("score").textContent = score;
+document.getElementById("progressBar").style.width = "0%";
+showScreen("gameScreen");
+nextRound();
 }
 
-function checkAnswer(side) {
-    const correct =
-        (currentSymbol === "●" && side === "LEFT") ||
-        (currentSymbol === "■" && side === "RIGHT");
+function nextRound() {
+if (round >= totalRounds) { endGame(); return; }
 
-    const reaction = Date.now() - startTime;
-    reactionTimes.push(reaction);
+round++;
+document.getElementById("progressBar").style.width = (round/totalRounds*100) + "%";
 
-    if (correct) score++;
+const symbol = Math.random() > 0.5 ? "●" : "■";
+document.getElementById("symbol").textContent = symbol;
+startTime = Date.now();
+}
 
-    scoreEl.textContent = score;
-    randomSymbol();
+function choose(side) {
+const symbol = document.getElementById("symbol").textContent;
+const correct = (symbol === "●" && side === "left") ||
+(symbol === "■" && side === "right");
+
+const reaction = Date.now() - startTime;
+reactionTimes.push(reaction);
+
+if (correct) score++;
+document.getElementById("score").textContent = score;
+
+nextRound();
+}
+
+function formatTime(ms) {
+ms = Number(ms);
+if (ms < 1000) return ms + " ms";
+return (ms/1000).toFixed(1).replace('.', ',') + " sek";
 }
 
 function endGame() {
-    clearInterval(interval);
-    game.classList.add("hidden");
-    result.classList.remove("hidden");
+showScreen("endScreen");
 
-    const avgReaction = Math.round(
-        reactionTimes.reduce((a,b)=>a+b,0) / reactionTimes.length
-    );
+const avg = reactionTimes.reduce((a,b)=>a+b,0)/reactionTimes.length;
+const best = localStorage.getItem("bestTime");
 
-    finalScoreEl.textContent = score;
-    reactionEl.textContent = "Genomsnittlig reaktionstid: " + avgReaction + " ms";
-
-    let best = parseInt(localStorage.getItem("bestReaction")) || avgReaction;
-
-    if (avgReaction < best) {
-        best = avgReaction;
-        localStorage.setItem("bestReaction", best);
-    }
-
-    bestReactionEl.textContent = "Bästa genomsnitt: " + best + " ms";
+if (!best || avg < best) {
+localStorage.setItem("bestTime", avg);
+document.getElementById("encouragement").textContent = "🔥 Wow! Nytt rekord! Bra kämpat!";
+} else {
+document.getElementById("encouragement").textContent = "👏 Bra tränat idag! Fortsätt så!";
 }
 
-leftZone.addEventListener("click", () => checkAnswer("LEFT"));
-rightZone.addEventListener("click", () => checkAnswer("RIGHT"));
-startBtn.addEventListener("click", startGame);
-restartBtn.addEventListener("click", startGame);
+document.getElementById("finalScore").textContent = "Du fick: " + score + " poäng";
+document.getElementById("reactionTime").textContent = "Genomsnitt: " + formatTime(avg);
+document.getElementById("bestTime").textContent = "Bästa: " + formatTime(localStorage.getItem("bestTime"));
+}
