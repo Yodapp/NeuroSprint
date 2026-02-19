@@ -11,21 +11,21 @@ const result = document.getElementById("result");
 const stimulus = document.getElementById("stimulus");
 const scoreDisplay = document.getElementById("score");
 const timerDisplay = document.getElementById("timer");
-const finalScore = document.getElementById("finalScore");
-const highScoreDisplay = document.getElementById("highScore");
+const finalScoreEl = document.getElementById("finalScore");
+const highScoreEl = document.getElementById("highScore");
+const performanceText = document.getElementById("performanceText");
 const comboDisplay = document.getElementById("combo");
 
 let score = 0;
 let timeLeft = 60;
 let interval;
-let currentColor = "";
 let combo = 0;
 let gentleMode = false;
+let currentSymbol = "🟢";
 
 function randomStimulus() {
-    currentColor = Math.random() < 0.5 ? "GRÖN" : "BLÅ";
-    stimulus.textContent = currentColor;
-    stimulus.style.color = currentColor === "GRÖN" ? "green" : "blue";
+    currentSymbol = Math.random() < 0.5 ? "🟢" : "🔵";
+    stimulus.textContent = currentSymbol;
 }
 
 function startGame() {
@@ -54,28 +54,24 @@ function updateUI() {
 }
 
 function checkAnswer(answer) {
-    const correct = (currentColor === "GRÖN" && answer === "VÄNSTER") ||
-                    (currentColor === "BLÅ" && answer === "HÖGER");
+    const correct =
+        (currentSymbol === "🟢" && answer === "LEFT") ||
+        (currentSymbol === "🔵" && answer === "RIGHT");
 
     if (correct) {
         score++;
         combo++;
-        if (combo === 5) showCombo();
+        if (combo === 5) {
+            comboDisplay.classList.remove("hidden");
+            setTimeout(()=>comboDisplay.classList.add("hidden"),800);
+        }
     } else {
         if (!gentleMode) score--;
         combo = 0;
     }
 
-    stimulus.style.transform = "scale(1.1)";
-    setTimeout(() => stimulus.style.transform = "scale(1)", 150);
-
     updateUI();
     randomStimulus();
-}
-
-function showCombo() {
-    comboDisplay.classList.remove("hidden");
-    setTimeout(() => comboDisplay.classList.add("hidden"), 800);
 }
 
 function endGame() {
@@ -83,18 +79,28 @@ function endGame() {
     game.classList.add("hidden");
     result.classList.remove("hidden");
 
-    finalScore.textContent = "Din poäng: " + score;
+    const finalScore = Math.max(score, 0); // never show negative final score
+    finalScoreEl.textContent = finalScore;
 
-    let highScore = localStorage.getItem("neuroHighScore") || 0;
-    if (score > highScore) {
-        highScore = score;
+    let highScore = parseInt(localStorage.getItem("neuroHighScore")) || 0;
+
+    if (finalScore > highScore) {
+        highScore = finalScore;
         localStorage.setItem("neuroHighScore", highScore);
     }
 
-    highScoreDisplay.textContent = "Bästa poäng: " + highScore;
+    highScoreEl.textContent = "Bästa poäng: " + highScore;
+
+    if (finalScore > 40) {
+        performanceText.textContent = "Fantastiskt fokus! 🌟";
+    } else if (finalScore > 20) {
+        performanceText.textContent = "Bra jobbat! 💪";
+    } else {
+        performanceText.textContent = "Fortsätt träna, du blir bättre varje dag ❤️";
+    }
 }
 
 startBtn.addEventListener("click", startGame);
 restartBtn.addEventListener("click", startGame);
-leftBtn.addEventListener("click", () => checkAnswer("VÄNSTER"));
-rightBtn.addEventListener("click", () => checkAnswer("HÖGER"));
+leftBtn.addEventListener("click", () => checkAnswer("LEFT"));
+rightBtn.addEventListener("click", () => checkAnswer("RIGHT"));

@@ -4,54 +4,60 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NeuroSprint</title>
-
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#4CAF50">
-
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="app">
 
-    <h1>🧠 NeuroSprint</h1>
-    <p class="subtitle">Hjärnträning för fokus & reaktion</p>
+<h1>🧠 NeuroSprint</h1>
+<p class="subtitle">Tryck på sidan som matchar symbolen</p>
 
-    <div id="menu">
-        <label class="toggle">
-            <input type="checkbox" id="gentleToggle">
-            <span>🌿 Gentle Mode (ingen minuspoäng, lugnare tempo)</span>
-        </label>
-        <button id="startBtn" class="primary">Starta</button>
+<div id="menu">
+    <div class="rules">
+        🟢 = VÄNSTER<br>
+        🔵 = HÖGER
     </div>
 
-    <div id="game" class="hidden">
-        <div class="topbar">
-            <div id="timer">Tid: 60</div>
-            <div id="score">Poäng: 0</div>
-        </div>
+    <label class="toggle">
+        <input type="checkbox" id="gentleToggle">
+        🌿 Gentle Mode (ingen minuspoäng)
+    </label>
 
-        <div id="combo" class="combo hidden">🔥 5 i rad!</div>
+    <button id="startBtn" class="primary">Starta</button>
+</div>
 
-        <div id="stimulus">GRÖN</div>
-
-        <div class="buttons">
-            <button id="leftBtn" class="action left">VÄNSTER</button>
-            <button id="rightBtn" class="action right">HÖGER</button>
-        </div>
+<div id="game" class="hidden">
+    <div class="topbar">
+        <div id="timer">Tid: 60</div>
+        <div id="score">Poäng: 0</div>
     </div>
 
-    <div id="result" class="hidden">
-        <h2>Slut!</h2>
-        <p id="finalScore"></p>
-        <p id="highScore"></p>
-        <button id="restartBtn" class="primary">Spela igen</button>
+    <div id="combo" class="combo hidden">🔥 5 i rad!</div>
+
+    <div id="stimulus" class="bigIcon">🟢</div>
+
+    <div class="buttons">
+        <button id="leftBtn" class="action">⬅</button>
+        <button id="rightBtn" class="action">➡</button>
     </div>
+</div>
+
+<div id="result" class="hidden resultCard">
+    <h2 id="resultTitle">Bra jobbat!</h2>
+    <div class="scoreCircle" id="scoreCircle">
+        <span id="finalScore"></span>
+    </div>
+    <p id="highScore"></p>
+    <p id="performanceText"></p>
+    <button id="restartBtn" class="primary">Spela igen</button>
+</div>
 
 </div>
 
 <script src="game.js"></script>
-
 <script>
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('service-worker.js');

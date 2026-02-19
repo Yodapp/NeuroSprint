@@ -1,21 +1,7 @@
-const CACHE_NAME = 'neurosprint-v3';
-const urlsToCache = [
-  '/',
-  '/index.html',
-  '/style.css',
-  '/game.js'
-];
-
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(urlsToCache))
-  );
+const CACHE_NAME='neurosprint-v5';
+self.addEventListener('install',e=>{
+  e.waitUntil(caches.open(CACHE_NAME).then(c=>c.addAll(['./'])));
 });
-
-self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request)
-      .then(response => response || fetch(event.request))
-  );
+self.addEventListener('fetch',e=>{
+  e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));
 });
