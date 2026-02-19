@@ -3,7 +3,7 @@
   "short_name": "NeuroSprint",
   "start_url": ".",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#4CAF50",
+  "background_color": "#F5F7F6",
+  "theme_color": "#2E7D32",
   "icons": []
 }

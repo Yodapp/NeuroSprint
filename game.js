@@ -1,37 +1,37 @@
 const startBtn = document.getElementById("startBtn");
 const restartBtn = document.getElementById("restartBtn");
-const leftBtn = document.getElementById("leftBtn");
-const rightBtn = document.getElementById("rightBtn");
 const gentleToggle = document.getElementById("gentleToggle");
 
 const menu = document.getElementById("menu");
 const game = document.getElementById("game");
 const result = document.getElementById("result");
 
-const stimulus = document.getElementById("stimulus");
-const scoreDisplay = document.getElementById("score");
-const timerDisplay = document.getElementById("timer");
+const timerEl = document.getElementById("timer");
+const scoreEl = document.getElementById("score");
 const finalScoreEl = document.getElementById("finalScore");
 const highScoreEl = document.getElementById("highScore");
-const performanceText = document.getElementById("performanceText");
-const comboDisplay = document.getElementById("combo");
+const feedbackEl = document.getElementById("feedback");
+
+const leftZone = document.getElementById("leftZone");
+const rightZone = document.getElementById("rightZone");
+const symbolEl = document.getElementById("symbol");
 
 let score = 0;
 let timeLeft = 60;
 let interval;
-let combo = 0;
 let gentleMode = false;
-let currentSymbol = "🟢";
+let currentType = "circle";
 
-function randomStimulus() {
-    currentSymbol = Math.random() < 0.5 ? "🟢" : "🔵";
-    stimulus.textContent = currentSymbol;
+function randomSymbol() {
+    currentType = Math.random() < 0.5 ? "circle" : "square";
+    symbolEl.className = "symbol " + currentType;
+    symbolEl.style.opacity = 0;
+    setTimeout(()=>symbolEl.style.opacity=1,50);
 }
 
 function startGame() {
     gentleMode = gentleToggle.checked;
     score = 0;
-    combo = 0;
     timeLeft = gentleMode ? 90 : 60;
 
     menu.classList.add("hidden");
@@ -39,7 +39,7 @@ function startGame() {
     game.classList.remove("hidden");
 
     updateUI();
-    randomStimulus();
+    randomSymbol();
 
     interval = setInterval(() => {
         timeLeft--;
@@ -49,29 +49,25 @@ function startGame() {
 }
 
 function updateUI() {
-    scoreDisplay.textContent = "Poäng: " + score;
-    timerDisplay.textContent = "Tid: " + timeLeft;
+    timerEl.textContent = "Tid: " + timeLeft;
+    scoreEl.textContent = "Poäng: " + score;
 }
 
-function checkAnswer(answer) {
+function checkAnswer(side) {
     const correct =
-        (currentSymbol === "🟢" && answer === "LEFT") ||
-        (currentSymbol === "🔵" && answer === "RIGHT");
+        (currentType === "circle" && side === "LEFT") ||
+        (currentType === "square" && side === "RIGHT");
 
     if (correct) {
         score++;
-        combo++;
-        if (combo === 5) {
-            comboDisplay.classList.remove("hidden");
-            setTimeout(()=>comboDisplay.classList.add("hidden"),800);
-        }
+        symbolEl.style.transform = "translate(-50%,-50%) scale(1.05)";
+        setTimeout(()=>symbolEl.style.transform="translate(-50%,-50%) scale(1)",150);
     } else {
         if (!gentleMode) score--;
-        combo = 0;
     }
 
     updateUI();
-    randomStimulus();
+    randomSymbol();
 }
 
 function endGame() {
@@ -79,11 +75,10 @@ function endGame() {
     game.classList.add("hidden");
     result.classList.remove("hidden");
 
-    const finalScore = Math.max(score, 0); // never show negative final score
+    const finalScore = Math.max(score, 0);
     finalScoreEl.textContent = finalScore;
 
     let highScore = parseInt(localStorage.getItem("neuroHighScore")) || 0;
-
     if (finalScore > highScore) {
         highScore = finalScore;
         localStorage.setItem("neuroHighScore", highScore);
@@ -92,15 +87,15 @@ function endGame() {
     highScoreEl.textContent = "Bästa poäng: " + highScore;
 
     if (finalScore > 40) {
-        performanceText.textContent = "Fantastiskt fokus! 🌟";
+        feedbackEl.textContent = "Stabil och snabb reaktion.";
     } else if (finalScore > 20) {
-        performanceText.textContent = "Bra jobbat! 💪";
+        feedbackEl.textContent = "Bra fokus. Fortsätt så.";
     } else {
-        performanceText.textContent = "Fortsätt träna, du blir bättre varje dag ❤️";
+        feedbackEl.textContent = "Ta det lugnt och försök igen.";
     }
 }
 
+leftZone.addEventListener("click", () => checkAnswer("LEFT"));
+rightZone.addEventListener("click", () => checkAnswer("RIGHT"));
 startBtn.addEventListener("click", startGame);
 restartBtn.addEventListener("click", startGame);
-leftBtn.addEventListener("click", () => checkAnswer("LEFT"));
-rightBtn.addEventListener("click", () => checkAnswer("RIGHT"));
