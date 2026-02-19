@@ -1,7 +1,7 @@
 body {
     margin:0;
     font-family:-apple-system,BlinkMacSystemFont,sans-serif;
-    background:#F5F7F6;
+    background:#F4F6F5;
     color:#222;
 }
 
@@ -12,18 +12,53 @@ body {
 
 .subtitle {
     color:#555;
+    margin-bottom:20px;
 }
 
-.rules {
-    margin:20px 0;
-    font-size:1.1em;
+.illustration {
+    margin:20px auto 30px auto;
+    max-width:300px;
+}
+
+.example-screen {
+    position:relative;
+    height:120px;
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+.half {
+    position:absolute;
+    top:0;
+    bottom:0;
+    width:50%;
+}
+
+.left {
+    left:0;
+    background:#E8F5E9;
+}
+
+.right {
+    right:0;
+    background:#E3F2FD;
+}
+
+.example-symbol {
+    position:absolute;
+    width:50px;
+    height:50px;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
 }
 
 .shape {
     display:inline-block;
-    width:24px;
-    height:24px;
-    margin-right:8px;
+    width:20px;
+    height:20px;
+    margin-right:6px;
     vertical-align:middle;
 }
 
@@ -53,7 +88,6 @@ button {
     display:flex;
     justify-content:space-between;
     padding:15px 20px;
-    font-weight:500;
 }
 
 .playArea {
@@ -66,31 +100,13 @@ button {
     flex:1;
 }
 
-.left {
-    background:#E8F5E9;
-}
-
-.right {
-    background:#E3F2FD;
-}
-
 .symbol {
     position:absolute;
+    width:200px;
+    height:200px;
     top:50%;
     left:50%;
     transform:translate(-50%,-50%);
-    width:200px;
-    height:200px;
-    transition:transform 0.15s ease, opacity 0.2s ease;
-}
-
-.symbol.circle {
-    background:#2E7D32;
-    border-radius:50%;
-}
-
-.symbol.square {
-    background:#1565C0;
 }
 
 .hidden {
@@ -105,14 +121,4 @@ button {
 .scoreDisplay {
     font-size:3em;
     margin:20px 0;
-}
-
-#feedback {
-    margin-top:10px;
-    color:#555;
-}
-
-.toggle {
-    display:block;
-    margin-top:10px;
 }

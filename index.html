@@ -11,17 +11,25 @@
 <body>
 
 <div id="menu" class="menu">
-    <h1>NeuroSprint</h1>
-    <p class="subtitle">Tryck på sidan som matchar symbolen</p>
 
-    <div class="rules">
-        <div><span class="shape circle"></span> = Vänster</div>
-        <div><span class="shape square"></span> = Höger</div>
+    <h1>NeuroSprint</h1>
+    <p class="subtitle">Matcha symbolen med rätt sida</p>
+
+    <div class="illustration">
+        <div class="example-screen">
+            <div class="half left"></div>
+            <div class="half right"></div>
+            <div class="example-symbol circle"></div>
+        </div>
+        <div class="example-text">
+            <span class="shape circle"></span> Tryck vänster<br>
+            <span class="shape square"></span> Tryck höger
+        </div>
     </div>
 
     <label class="toggle">
         <input type="checkbox" id="gentleToggle">
-        Gentle Mode (ingen minuspoäng, lugnare tempo)
+        Gentle Mode (ingen minuspoäng)
     </label>
 
     <button id="startBtn" class="primary">Starta</button>
@@ -37,22 +45,19 @@
     <div class="playArea">
         <div id="leftZone" class="zone left"></div>
         <div id="rightZone" class="zone right"></div>
-
         <div id="symbol" class="symbol circle"></div>
     </div>
 
 </div>
 
 <div id="result" class="hidden result">
-    <h2 id="resultTitle">Bra jobbat</h2>
+    <h2>Bra jobbat</h2>
     <div class="scoreDisplay" id="finalScore"></div>
     <div id="highScore"></div>
-    <div id="feedback"></div>
     <button id="restartBtn" class="primary">Spela igen</button>
 </div>
 
 <script src="game.js"></script>
-
 <script>
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('service-worker.js');

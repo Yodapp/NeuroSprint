@@ -10,7 +10,6 @@ const timerEl = document.getElementById("timer");
 const scoreEl = document.getElementById("score");
 const finalScoreEl = document.getElementById("finalScore");
 const highScoreEl = document.getElementById("highScore");
-const feedbackEl = document.getElementById("feedback");
 
 const leftZone = document.getElementById("leftZone");
 const rightZone = document.getElementById("rightZone");
@@ -25,8 +24,6 @@ let currentType = "circle";
 function randomSymbol() {
     currentType = Math.random() < 0.5 ? "circle" : "square";
     symbolEl.className = "symbol " + currentType;
-    symbolEl.style.opacity = 0;
-    setTimeout(()=>symbolEl.style.opacity=1,50);
 }
 
 function startGame() {
@@ -60,8 +57,6 @@ function checkAnswer(side) {
 
     if (correct) {
         score++;
-        symbolEl.style.transform = "translate(-50%,-50%) scale(1.05)";
-        setTimeout(()=>symbolEl.style.transform="translate(-50%,-50%) scale(1)",150);
     } else {
         if (!gentleMode) score--;
     }
@@ -85,14 +80,6 @@ function endGame() {
     }
 
     highScoreEl.textContent = "Bästa poäng: " + highScore;
-
-    if (finalScore > 40) {
-        feedbackEl.textContent = "Stabil och snabb reaktion.";
-    } else if (finalScore > 20) {
-        feedbackEl.textContent = "Bra fokus. Fortsätt så.";
-    } else {
-        feedbackEl.textContent = "Ta det lugnt och försök igen.";
-    }
 }
 
 leftZone.addEventListener("click", () => checkAnswer("LEFT"));
