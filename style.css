@@ -1,0 +1,47 @@
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f7fb;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+button {
+    font-size: 1.2em;
+    padding: 15px 25px;
+    margin: 10px;
+    border-radius: 10px;
+    border: none;
+}
+
+#leftBtn {
+    background-color: #e0e0e0;
+}
+
+#rightBtn {
+    background-color: #e0e0e0;
+}
+
+#startBtn, #restartBtn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#stimulus {
+    font-size: 3em;
+    margin: 30px 0;
+}
+
+.hidden {
+    display: none;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+}
