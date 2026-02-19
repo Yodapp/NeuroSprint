@@ -5,49 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HjärnMatch</title>
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#2E7D32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#EDE7E3">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<div id="menu" class="menu">
-    <h1>HjärnMatch</h1>
-    <p class="subtitle">Matcha symbolen med rätt sida</p>
-
-    <button id="installBtn" class="secondary hidden">📱 Installera appen</button>
-    <button id="startBtn" class="primary">Starta</button>
-</div>
-
-<div id="game" class="hidden">
-    <div class="topbar">
-        <div id="score">Poäng: 0</div>
-    </div>
-
-    <div class="playArea">
-        <div id="leftZone" class="zone left"></div>
-        <div id="rightZone" class="zone right"></div>
-
-        <div class="ring">
-            <div id="progressRing" class="progress"></div>
-            <div id="symbol" class="symbol circle"></div>
-        </div>
-    </div>
-</div>
-
-<div id="result" class="hidden result">
-    <h2>Resultat</h2>
-    <div class="scoreDisplay" id="finalScore"></div>
-    <div id="reaction"></div>
-    <div id="bestReaction"></div>
-    <button id="restartBtn" class="primary">Spela igen</button>
-</div>
-
-<script src="game.js"></script>
-<script>
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('service-worker.js');
-}
-</script>
-
+<h1>HjärnMatch</h1>
+<p>Test build with icons</p>
 </body>
 </html>
