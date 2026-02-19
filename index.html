@@ -2,23 +2,26 @@
 <html lang="sv">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>HjärnMatch</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div id="startScreen" class="screen active center">
-  <h1>HjärnMatch</h1>
-  <p class="subtitle">20 snabba beslut. Under en minut.</p>
-  <button class="primary" onclick="startGame()">Starta</button>
+<div id="startScreen" class="screen active">
+  <div class="center">
+    <h1>HjärnMatch</h1>
+    <p class="subtitle">20 snabba beslut. Under en minut.</p>
+    <button class="primary" onclick="startGame()">Starta</button>
+  </div>
 </div>
 
 <div id="gameScreen" class="screen">
   <div class="topbar">
-    <div class="round" id="roundText">Runda 1 av 20</div>
-    <div class="score">Poäng: <span id="score">0</span></div>
+    <div id="roundText">Runda 1 av 20</div>
+    <div>Poäng: <span id="score">0</span></div>
   </div>
+
   <div class="progress-container">
     <div id="progressBar" class="progress-bar"></div>
   </div>
@@ -37,13 +40,15 @@
   </div>
 </div>
 
-<div id="endScreen" class="screen center">
-  <h2>Resultat</h2>
-  <h1 id="finalScore"></h1>
-  <p id="encouragement"></p>
-  <p id="reactionTime"></p>
-  <p id="bestTime"></p>
-  <button class="primary" onclick="startGame()">Spela igen</button>
+<div id="endScreen" class="screen">
+  <div class="center">
+    <h2>Resultat</h2>
+    <h1 id="finalScore"></h1>
+    <p id="encouragement"></p>
+    <p id="reactionTime"></p>
+    <p id="bestTime"></p>
+    <button class="primary" onclick="startGame()">Spela igen</button>
+  </div>
 </div>
 
 <script src="game.js"></script>
