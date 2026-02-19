@@ -6,11 +6,56 @@
 <title>HjärnMatch</title>
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta name="theme-color" content="#EDE7E3">
+<meta name="theme-color" content="#6B8E7A">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1>HjärnMatch</h1>
-<p>Test build with icons</p>
+
+<div id="menu" class="menu">
+    <h1>HjärnMatch</h1>
+    <p class="subtitle">Enkel träning för fokus och reaktion</p>
+
+    <div class="hero">
+        <div class="heroShape left">●</div>
+        <div class="heroShape right">■</div>
+    </div>
+
+    <button id="startBtn" class="primary">Starta</button>
+    <button id="installBtn" class="secondary hidden">Installera appen</button>
+</div>
+
+<div id="game" class="hidden">
+    <div class="scoreBlock">
+        <div class="scoreLabel">POÄNG</div>
+        <div id="score" class="scoreValue">0</div>
+    </div>
+
+    <div class="playArea">
+        <div id="leftZone" class="zone">
+            <div class="corner">●</div>
+        </div>
+        <div id="rightZone" class="zone">
+            <div class="corner">■</div>
+        </div>
+
+        <div id="symbol" class="symbol">●</div>
+    </div>
+</div>
+
+<div id="result" class="hidden result">
+    <h2>Resultat</h2>
+    <div id="finalScore" class="scoreValue"></div>
+    <div id="reaction"></div>
+    <div id="bestReaction"></div>
+    <button id="restartBtn" class="primary">Spela igen</button>
+</div>
+
+<script src="game.js"></script>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js');
+}
+</script>
+
 </body>
 </html>

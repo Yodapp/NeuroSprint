@@ -1,1 +1,98 @@
-body { font-family: sans-serif; text-align:center; padding:40px; }
+
+body {
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+    background:#F6F4F1;
+    color:#1E1E1E;
+    text-align:center;
+}
+
+.menu { padding:60px 20px; }
+
+.subtitle { color:#555; margin-bottom:40px; }
+
+.hero {
+    width:220px;
+    height:220px;
+    margin:0 auto 40px auto;
+    border-radius:28px;
+    background:white;
+    box-shadow:0 20px 40px rgba(0,0,0,0.08);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:40px;
+}
+
+.heroShape {
+    font-size:3em;
+    color:#6B8E7A;
+}
+
+.primary {
+    background:#6B8E7A;
+    color:white;
+    border:none;
+    padding:16px 40px;
+    border-radius:16px;
+    font-size:1.1em;
+    margin:10px;
+}
+
+.secondary {
+    background:transparent;
+    border:1px solid #6B8E7A;
+    color:#6B8E7A;
+    padding:12px 28px;
+    border-radius:14px;
+}
+
+.scoreBlock { padding:20px; }
+
+.scoreLabel {
+    font-size:0.8em;
+    letter-spacing:2px;
+    color:#666;
+}
+
+.scoreValue {
+    font-size:3em;
+    font-weight:600;
+}
+
+.playArea {
+    position:relative;
+    height:70vh;
+    display:flex;
+}
+
+.zone {
+    flex:1;
+    background:#ECECEC;
+    position:relative;
+    transition:background 0.2s ease;
+}
+
+.zone:active { background:#DCDCDC; }
+
+.corner {
+    position:absolute;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:2em;
+    opacity:0.4;
+}
+
+.symbol {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    font-size:6em;
+    color:#1E1E1E;
+}
+
+.hidden { display:none; }
+
+.result { padding:60px 20px; }
