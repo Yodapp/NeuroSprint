@@ -3,122 +3,62 @@ body {
     font-family:-apple-system,BlinkMacSystemFont,sans-serif;
     background:#F4F6F5;
     color:#222;
-}
-
-.menu {
     text-align:center;
-    padding:40px 20px;
 }
 
-.subtitle {
-    color:#555;
-    margin-bottom:20px;
-}
+.menu { padding:60px 20px; }
 
-.illustration {
-    margin:20px auto 30px auto;
-    max-width:300px;
-}
-
-.example-screen {
-    position:relative;
-    height:120px;
-    border-radius:16px;
-    overflow:hidden;
-    box-shadow:0 5px 15px rgba(0,0,0,0.08);
-}
-
-.half {
-    position:absolute;
-    top:0;
-    bottom:0;
-    width:50%;
-}
-
-.left {
-    left:0;
-    background:#E8F5E9;
-}
-
-.right {
-    right:0;
-    background:#E3F2FD;
-}
-
-.example-symbol {
-    position:absolute;
-    width:50px;
-    height:50px;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-}
-
-.shape {
-    display:inline-block;
-    width:20px;
-    height:20px;
-    margin-right:6px;
-    vertical-align:middle;
-}
-
-.circle {
-    background:#2E7D32;
-    border-radius:50%;
-}
-
-.square {
-    background:#1565C0;
-}
+.subtitle { color:#555; margin-bottom:30px; }
 
 button {
-    padding:18px 30px;
+    padding:16px 28px;
     font-size:1.1em;
     border:none;
     border-radius:14px;
-    margin-top:20px;
+    margin:10px;
 }
 
-.primary {
-    background:#2E7D32;
-    color:white;
+.primary { background:#2E7D32; color:white; }
+.secondary { background:#E3F2FD; color:#1565C0; }
+
+.topbar { padding:20px; }
+
+.playArea { position:relative; height:75vh; display:flex; }
+
+.zone { flex:1; }
+.left { background:#E8F5E9; }
+.right { background:#E3F2FD; }
+
+.ring {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:240px;
+    height:240px;
 }
 
-.topbar {
-    display:flex;
-    justify-content:space-between;
-    padding:15px 20px;
-}
-
-.playArea {
-    position:relative;
-    height:75vh;
-    display:flex;
-}
-
-.zone {
-    flex:1;
+.progress {
+    position:absolute;
+    width:240px;
+    height:240px;
+    border-radius:50%;
+    border:8px solid #C8E6C9;
 }
 
 .symbol {
     position:absolute;
-    width:200px;
-    height:200px;
+    width:180px;
+    height:180px;
     top:50%;
     left:50%;
     transform:translate(-50%,-50%);
 }
 
-.hidden {
-    display:none;
-}
+.circle { background:#2E7D32; border-radius:50%; }
+.square { background:#1565C0; }
 
-.result {
-    text-align:center;
-    padding:40px 20px;
-}
+.hidden { display:none; }
 
-.scoreDisplay {
-    font-size:3em;
-    margin:20px 0;
-}
+.result { padding:60px 20px; }
+.scoreDisplay { font-size:2.5em; margin:20px 0; }

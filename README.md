@@ -1,15 +1,17 @@
-# NeuroSprint v3 🧠
+# HjärnMatch – Premium Rehab Edition
 
-Ny version med:
-- 🌿 Gentle Mode
-- 🔥 Combo-system
-- 🎨 App-lik design
-- 📱 Installera som app (PWA)
+En enkel och tillgänglig hjärnträningsapp för vuxna, strokeöverlevare och äldre.
 
-## Installera som app (iPhone)
+## Funktioner
+- Ingen minuspoäng
+- Reaktionstid visas på slutskärmen
+- Bästa genomsnittliga reaktionstid sparas lokalt
+- iOS-installknapp (Safari)
+- Färg + form (tillgänglig design)
 
-1. Öppna sidan i Safari
-2. Tryck på Dela-knappen
+## Installation på iPhone
+1. Öppna i Safari
+2. Tryck Dela
 3. Välj "Lägg till på hemskärmen"
 
-Nu fungerar den som en riktig app.
+Version: v9 – 2026-02-19

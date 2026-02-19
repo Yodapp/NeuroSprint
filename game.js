@@ -1,53 +1,59 @@
 const startBtn = document.getElementById("startBtn");
 const restartBtn = document.getElementById("restartBtn");
-const gentleToggle = document.getElementById("gentleToggle");
+const installBtn = document.getElementById("installBtn");
 
 const menu = document.getElementById("menu");
 const game = document.getElementById("game");
 const result = document.getElementById("result");
 
-const timerEl = document.getElementById("timer");
 const scoreEl = document.getElementById("score");
 const finalScoreEl = document.getElementById("finalScore");
-const highScoreEl = document.getElementById("highScore");
+const reactionEl = document.getElementById("reaction");
+const bestReactionEl = document.getElementById("bestReaction");
 
 const leftZone = document.getElementById("leftZone");
 const rightZone = document.getElementById("rightZone");
 const symbolEl = document.getElementById("symbol");
+const progressRing = document.getElementById("progressRing");
 
 let score = 0;
 let timeLeft = 60;
 let interval;
-let gentleMode = false;
 let currentType = "circle";
+let startTime;
+let reactionTimes = [];
+
+function detectIOS() {
+    const ua = window.navigator.userAgent;
+    const iOS = /iPad|iPhone|iPod/.test(ua);
+    const standalone = window.navigator.standalone;
+    if (iOS && !standalone) {
+        installBtn.classList.remove("hidden");
+    }
+}
 
 function randomSymbol() {
     currentType = Math.random() < 0.5 ? "circle" : "square";
     symbolEl.className = "symbol " + currentType;
+    startTime = Date.now();
 }
 
 function startGame() {
-    gentleMode = gentleToggle.checked;
     score = 0;
-    timeLeft = gentleMode ? 90 : 60;
+    reactionTimes = [];
+    timeLeft = 60;
 
     menu.classList.add("hidden");
     result.classList.add("hidden");
     game.classList.remove("hidden");
 
-    updateUI();
+    scoreEl.textContent = "Poäng: 0";
     randomSymbol();
 
     interval = setInterval(() => {
         timeLeft--;
-        updateUI();
         if (timeLeft <= 0) endGame();
     }, 1000);
-}
-
-function updateUI() {
-    timerEl.textContent = "Tid: " + timeLeft;
-    scoreEl.textContent = "Poäng: " + score;
 }
 
 function checkAnswer(side) {
@@ -55,13 +61,12 @@ function checkAnswer(side) {
         (currentType === "circle" && side === "LEFT") ||
         (currentType === "square" && side === "RIGHT");
 
-    if (correct) {
-        score++;
-    } else {
-        if (!gentleMode) score--;
-    }
+    const reaction = Date.now() - startTime;
+    reactionTimes.push(reaction);
 
-    updateUI();
+    if (correct) score++;
+
+    scoreEl.textContent = "Poäng: " + score;
     randomSymbol();
 }
 
@@ -70,19 +75,26 @@ function endGame() {
     game.classList.add("hidden");
     result.classList.remove("hidden");
 
-    const finalScore = Math.max(score, 0);
-    finalScoreEl.textContent = finalScore;
+    const avgReaction = Math.round(
+        reactionTimes.reduce((a,b)=>a+b,0) / reactionTimes.length
+    );
 
-    let highScore = parseInt(localStorage.getItem("neuroHighScore")) || 0;
-    if (finalScore > highScore) {
-        highScore = finalScore;
-        localStorage.setItem("neuroHighScore", highScore);
+    finalScoreEl.textContent = "Poäng: " + score;
+    reactionEl.textContent = "Genomsnittlig reaktionstid: " + avgReaction + " ms";
+
+    let best = parseInt(localStorage.getItem("bestReaction")) || avgReaction;
+
+    if (avgReaction < best) {
+        best = avgReaction;
+        localStorage.setItem("bestReaction", best);
     }
 
-    highScoreEl.textContent = "Bästa poäng: " + highScore;
+    bestReactionEl.textContent = "Bästa genomsnitt: " + best + " ms";
 }
 
 leftZone.addEventListener("click", () => checkAnswer("LEFT"));
 rightZone.addEventListener("click", () => checkAnswer("RIGHT"));
 startBtn.addEventListener("click", startGame);
 restartBtn.addEventListener("click", startGame);
+
+detectIOS();
