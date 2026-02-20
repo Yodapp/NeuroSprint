@@ -49,6 +49,15 @@ padding:20px;
 font-size:16px;
 }
 
+#score {
+display:inline-block;
+transition:transform 0.15s ease;
+}
+
+#score.pop {
+transform:scale(1.25);
+}
+
 .progress-container {
 height:12px;
 background:#ddd;
@@ -61,7 +70,7 @@ height:12px;
 width:0%;
 background:#6f8f7d;
 border-radius:8px;
-transition:width 0.25s ease;
+transition:width 0.2s ease;
 }
 
 .game-area {
@@ -73,7 +82,11 @@ height:30vh;
 
 .symbol {
 font-size:130px;
-transition:opacity 0.15s ease, transform 0.15s ease;
+transition:opacity 0.12s ease, transform 0.12s ease;
+}
+
+.symbol.pop {
+transform:scale(1.15);
 }
 
 .symbol.hide {
@@ -93,7 +106,7 @@ justify-content:center;
 align-items:center;
 position:relative;
 cursor:pointer;
-transition:background 0.15s ease;
+transition:box-shadow 0.12s ease;
 }
 
 .left {
@@ -105,11 +118,11 @@ background:linear-gradient(to bottom,#e3e3e3,#d1d1d1);
 }
 
 .half.correct {
-background:#cfe8d8 !important;
+box-shadow:inset 0 0 0 6px rgba(80,180,120,0.6);
 }
 
 .half.wrong {
-background:#f2cfcf !important;
+box-shadow:inset 0 0 0 6px rgba(220,80,80,0.6);
 }
 
 .bg-icon {

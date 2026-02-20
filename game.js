@@ -31,7 +31,7 @@ document.getElementById("progressBar").style.width=(round/totalRounds*100)+"%";
 currentSymbol=Math.random()>0.5?"●":"■";
 const symbolEl=document.getElementById("symbol");
 symbolEl.textContent=currentSymbol;
-symbolEl.classList.remove("hide");
+symbolEl.classList.remove("hide","pop");
 
 startTime=Date.now();
 inputLocked=false;
@@ -47,26 +47,33 @@ reactionTimes.push(reaction);
 
 const left=document.getElementById("leftHalf");
 const right=document.getElementById("rightHalf");
+const symbolEl=document.getElementById("symbol");
 
 if(correct){
 score++;
 document.getElementById("score").textContent=score;
+document.getElementById("score").classList.add("pop");
+symbolEl.classList.add("pop");
+navigator.vibrate && navigator.vibrate(10);
 (side==="left"?left:right).classList.add("correct");
 }else{
 (side==="left"?left:right).classList.add("wrong");
+navigator.vibrate && navigator.vibrate(30);
 }
 
 setTimeout(()=>{
+document.getElementById("score").classList.remove("pop");
+symbolEl.classList.remove("pop");
 left.classList.remove("correct","wrong");
 right.classList.remove("correct","wrong");
 
-document.getElementById("symbol").classList.add("hide");
+symbolEl.classList.add("hide");
 
 setTimeout(()=>{
 nextRound();
-},200);
+},120);
 
-},150);
+},120);
 }
 
 function formatTime(ms){
@@ -86,7 +93,7 @@ if(!best||avg<best){
 localStorage.setItem("bestTime",avg);
 encouragement="🔥 Nytt personligt rekord! Perfekt runda!";
 }else{
-encouragement="💪 20 av 20! Stark prestation!";
+encouragement="💪 20 av 20! Grymt jobbat!";
 }
 }else{
 encouragement="Bra jobbat! Försök nå 20/20 nästa gång.";
