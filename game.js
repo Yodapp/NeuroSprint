@@ -3,6 +3,8 @@ let round=0;
 let totalRounds=20;
 let startTime;
 let reactionTimes=[];
+let currentSymbol="";
+let inputLocked=false;
 
 function showScreen(id){
 document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
@@ -21,43 +23,81 @@ nextRound();
 
 function nextRound(){
 if(round>=totalRounds){ endGame(); return; }
+
 round++;
 document.getElementById("roundText").textContent="Runda "+round+" av "+totalRounds;
 document.getElementById("progressBar").style.width=(round/totalRounds*100)+"%";
-const symbol=Math.random()>0.5?"●":"■";
-document.getElementById("symbol").textContent=symbol;
+
+currentSymbol=Math.random()>0.5?"●":"■";
+const symbolEl=document.getElementById("symbol");
+symbolEl.textContent=currentSymbol;
+symbolEl.classList.remove("hide");
+
 startTime=Date.now();
+inputLocked=false;
 }
 
 function choose(side){
-const symbol=document.getElementById("symbol").textContent;
-const correct=(symbol==="●"&&side==="left")||(symbol==="■"&&side==="right");
+if(inputLocked) return;
+inputLocked=true;
+
+const correct=(currentSymbol==="●"&&side==="left")||(currentSymbol==="■"&&side==="right");
 const reaction=Date.now()-startTime;
 reactionTimes.push(reaction);
-if(correct) score++;
+
+const left=document.getElementById("leftHalf");
+const right=document.getElementById("rightHalf");
+
+if(correct){
+score++;
 document.getElementById("score").textContent=score;
+(side==="left"?left:right).classList.add("correct");
+}else{
+(side==="left"?left:right).classList.add("wrong");
+}
+
+setTimeout(()=>{
+left.classList.remove("correct","wrong");
+right.classList.remove("correct","wrong");
+
+document.getElementById("symbol").classList.add("hide");
+
+setTimeout(()=>{
 nextRound();
+},200);
+
+},150);
 }
 
 function formatTime(ms){
 ms=Number(ms);
-if(ms<1000) return ms+" ms";
+if(ms<1000) return Math.round(ms)+" ms";
 return (ms/1000).toFixed(1).replace('.',',')+" sek";
 }
 
 function endGame(){
 showScreen("endScreen");
 const avg=reactionTimes.reduce((a,b)=>a+b,0)/reactionTimes.length;
-const best=localStorage.getItem("bestTime");
 
+let encouragement="";
+if(score===20){
+const best=localStorage.getItem("bestTime");
 if(!best||avg<best){
 localStorage.setItem("bestTime",avg);
-document.getElementById("encouragement").textContent="🔥 Nytt personligt rekord! Fantastiskt jobbat.";
+encouragement="🔥 Nytt personligt rekord! Perfekt runda!";
 }else{
-document.getElementById("encouragement").textContent="👏 Bra tränat idag. Lite varje dag gör skillnad.";
+encouragement="💪 20 av 20! Stark prestation!";
+}
+}else{
+encouragement="Bra jobbat! Försök nå 20/20 nästa gång.";
 }
 
+document.getElementById("encouragement").textContent=encouragement;
 document.getElementById("finalScore").textContent="Du fick: "+score+" poäng";
 document.getElementById("reactionTime").textContent="Genomsnitt: "+formatTime(avg);
-document.getElementById("bestTime").textContent="Bästa: "+formatTime(localStorage.getItem("bestTime"));
+
+const bestTime=localStorage.getItem("bestTime");
+document.getElementById("bestTime").textContent=bestTime?
+"Bästa (20/20): "+formatTime(bestTime):
+"Sikta på 20/20 för att låsa upp bästa-tid";
 }
