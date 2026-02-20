@@ -52,7 +52,6 @@ const symbolEl=document.getElementById("symbol");
 if(correct){
 score++;
 document.getElementById("score").textContent=score;
-document.getElementById("score").classList.add("pop");
 symbolEl.classList.add("pop");
 navigator.vibrate && navigator.vibrate(10);
 (side==="left"?left:right).classList.add("correct");
@@ -62,22 +61,17 @@ navigator.vibrate && navigator.vibrate(30);
 }
 
 setTimeout(()=>{
-document.getElementById("score").classList.remove("pop");
 symbolEl.classList.remove("pop");
 left.classList.remove("correct","wrong");
 right.classList.remove("correct","wrong");
-
 symbolEl.classList.add("hide");
 
-setTimeout(()=>{
-nextRound();
-},120);
+setTimeout(()=>{ nextRound(); },120);
 
 },120);
 }
 
 function formatTime(ms){
-ms=Number(ms);
 if(ms<1000) return Math.round(ms)+" ms";
 return (ms/1000).toFixed(1).replace('.',',')+" sek";
 }
@@ -86,25 +80,32 @@ function endGame(){
 showScreen("endScreen");
 const avg=reactionTimes.reduce((a,b)=>a+b,0)/reactionTimes.length;
 
+let title="";
 let encouragement="";
+
 if(score===20){
 const best=localStorage.getItem("bestTime");
 if(!best||avg<best){
 localStorage.setItem("bestTime",avg);
-encouragement="🔥 Nytt personligt rekord! Perfekt runda!";
+title="💪 20 av 20";
+encouragement="Du är snabb idag.";
 }else{
-encouragement="💪 20 av 20! Grymt jobbat!";
+title="💪 20 av 20";
+encouragement="Stark prestation.";
 }
 }else{
-encouragement="Bra jobbat! Försök nå 20/20 nästa gång.";
+title="Resultat";
+encouragement="Fortsätt träna – sikta på 20/20.";
 }
 
-document.getElementById("encouragement").textContent=encouragement;
-document.getElementById("finalScore").textContent="Du fick: "+score+" poäng";
+document.getElementById("resultTitle").textContent=title;
+document.getElementById("finalScore").textContent=score+" poäng";
 document.getElementById("reactionTime").textContent="Genomsnitt: "+formatTime(avg);
 
 const bestTime=localStorage.getItem("bestTime");
 document.getElementById("bestTime").textContent=bestTime?
 "Bästa (20/20): "+formatTime(bestTime):
-"Sikta på 20/20 för att låsa upp bästa-tid";
+"";
+
+document.getElementById("encouragement").textContent=encouragement;
 }
