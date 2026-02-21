@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>HjärnMatch</title>
+
+<link rel="manifest" href="/NeuroSprint/manifest.json?v=18">
+<link rel="apple-touch-icon" href="/NeuroSprint/apple-touch-icon.png?v=18">
+<meta name="theme-color" content="#4F6F64">
+
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,12 +16,13 @@
 <div id="startScreen" class="screen active">
   <div class="card center">
     <h1>HjärnMatch</h1>
-    <p class="subtitle">1 minut fokusträning. När som helst.</p>
-    <div class="preview">
-      <div class="mini left-mini">●</div>
-      <div class="mini right-mini">■</div>
+    <p class="subtitle">1 minut fokusträning</p>
+    <div class="hero">
+        <div class="hero-circle">●</div>
+        <div class="hero-square">■</div>
     </div>
     <button class="primary" onclick="startGame()">Starta</button>
+    <button id="installBtn" class="install">Installera som app</button>
   </div>
 </div>
 
@@ -35,12 +41,8 @@
   </div>
 
   <div class="halves">
-    <div id="leftHalf" class="half left" onclick="choose('left')">
-      <div class="bg-icon">●</div>
-    </div>
-    <div id="rightHalf" class="half right" onclick="choose('right')">
-      <div class="bg-icon">■</div>
-    </div>
+    <div id="leftHalf" class="half left" onclick="choose('left')"></div>
+    <div id="rightHalf" class="half right" onclick="choose('right')"></div>
   </div>
 </div>
 
@@ -48,8 +50,6 @@
   <div class="card center result-card">
     <h2 id="resultTitle"></h2>
     <h1 id="finalScore"></h1>
-    <p id="reactionTime"></p>
-    <p id="bestTime"></p>
     <p id="encouragement"></p>
     <button class="primary" onclick="startGame()">Spela igen</button>
   </div>

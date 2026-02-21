@@ -1,150 +1,22 @@
-html, body {
-margin:0;
-padding:0;
-height:100%;
-overflow:hidden;
-font-family:-apple-system,BlinkMacSystemFont,sans-serif;
-background:linear-gradient(180deg,#F4F1EC,#EDE7DF);
-color:#2F2F2F;
-}
 
-.screen {
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100dvh;
-display:none;
-}
-
-.screen.active { display:block; }
-
-.card {
-background:white;
-border-radius:24px;
-box-shadow:0 20px 40px rgba(0,0,0,0.08);
-padding:40px 30px;
-max-width:420px;
-margin:auto;
-}
-
-.center {
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-height:100%;
-}
-
-h1 { font-size:42px; margin:10px 0; }
-.subtitle { color:#6b6b6b; margin-bottom:30px; }
-
-.primary {
-background:#5E7F73;
-color:white;
-border:none;
-padding:16px 40px;
-font-size:18px;
-border-radius:16px;
-box-shadow:0 8px 20px rgba(94,127,115,0.4);
-}
-
-.preview {
-display:flex;
-gap:30px;
-margin-bottom:30px;
-}
-
-.mini {
-font-size:40px;
-padding:10px 20px;
-border-radius:12px;
-}
-
-.left-mini { background:#E3EFEA; }
-.right-mini { background:#E8E8E8; }
-
-.topbar {
-display:flex;
-justify-content:space-between;
-padding:20px;
-font-size:16px;
-}
-
-.score span {
-font-weight:bold;
-font-size:20px;
-}
-
-.progress-container {
-height:16px;
-background:#E5E1DA;
-margin:0 20px 10px 20px;
-border-radius:12px;
-}
-
-.progress-bar {
-height:16px;
-width:0%;
-background:linear-gradient(90deg,#5E7F73,#6BAF8D);
-border-radius:12px;
-transition:width 0.25s ease;
-}
-
-.game-area {
-display:flex;
-justify-content:center;
-align-items:center;
-height:30vh;
-}
-
-.symbol {
-font-size:140px;
-transition:transform 0.12s ease, opacity 0.12s ease;
-text-shadow:0 10px 20px rgba(0,0,0,0.15);
-}
-
-.symbol.pop { transform:scale(1.15); }
-.symbol.hide { opacity:0; transform:scale(0.9); }
-
-.halves {
-display:flex;
-height:40vh;
-}
-
-.half {
-flex:1;
-display:flex;
-justify-content:center;
-align-items:center;
-position:relative;
-cursor:pointer;
-transition:box-shadow 0.12s ease;
-}
-
-.left {
-background:linear-gradient(to bottom,#E3EFEA,#D5E4DD);
-}
-
-.right {
-background:linear-gradient(to bottom,#ECECEC,#E0E0E0);
-}
-
-.half.correct {
-box-shadow:inset 0 0 0 8px rgba(107,175,141,0.7);
-}
-
-.half.wrong {
-box-shadow:inset 0 0 0 8px rgba(201,122,107,0.7);
-}
-
-.bg-icon {
-font-size:120px;
-opacity:0.06;
-}
-
-.result-card h1 {
-font-size:48px;
-margin:10px 0;
-}
+html,body{margin:0;height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:linear-gradient(180deg,#F3F0EA,#E8E1D6);color:#2F2F2F;}
+.screen{position:fixed;width:100%;height:100dvh;display:none;}
+.screen.active{display:block;}
+.card{background:white;border-radius:28px;box-shadow:0 30px 60px rgba(0,0,0,0.08);padding:40px 30px;max-width:420px;margin:auto;}
+.center{display:flex;flex-direction:column;justify-content:center;align-items:center;height:100%;text-align:center;}
+.hero{display:flex;gap:40px;margin:30px 0;animation:float 3s ease-in-out infinite;}
+@keyframes float{0%{transform:translateY(0px);}50%{transform:translateY(-4px);}100%{transform:translateY(0px);}}
+.primary{background:#4F6F64;color:white;border:none;padding:16px 40px;border-radius:18px;margin-top:10px;}
+.install{margin-top:15px;background:none;border:none;color:#4F6F64;font-size:14px;}
+.topbar{display:flex;justify-content:space-between;padding:20px;}
+.progress-container{height:18px;background:#E6E0D6;margin:0 20px;border-radius:20px;}
+.progress-bar{height:18px;width:0%;background:linear-gradient(90deg,#4F6F64,#6BAF8D);border-radius:20px;transition:width .25s ease;}
+.game-area{display:flex;justify-content:center;align-items:center;height:30vh;}
+.symbol{font-size:150px;transition:transform .12s ease,opacity .12s ease;text-shadow:0 15px 30px rgba(0,0,0,.15);}
+.symbol.hide{opacity:0;transform:scale(.9);}
+.symbol.pop{transform:scale(1.1);}
+.halves{display:flex;height:40vh;}
+.half{flex:1;}
+.left{background:linear-gradient(#E3EFEA,#D6E4DD);}
+.right{background:linear-gradient(#ECECEC,#E0E0E0);}
+.result-card h1{font-size:50px;}
