@@ -4,10 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>HjärnMatch</title>
-
-<link rel="manifest" href="/NeuroSprint/manifest.json?v=20">
 <meta name="theme-color" content="#2F5D50">
-
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -23,7 +20,7 @@
 <div id="gameScreen" class="screen">
   <div class="topbar">
     <div id="roundText">Runda 1 av 20</div>
-    <div class="score">Poäng <span id="score">0</span></div>
+    <div>Poäng <span id="score">0</span></div>
   </div>
 
   <div class="progress-container">
@@ -35,12 +32,8 @@
   </div>
 
   <div class="halves">
-    <div id="leftHalf" class="half left">
-        <div class="choice-symbol">●</div>
-    </div>
-    <div id="rightHalf" class="half right">
-        <div class="choice-symbol">■</div>
-    </div>
+    <div id="leftHalf" class="half left"><div class="choice-symbol">●</div></div>
+    <div id="rightHalf" class="half right"><div class="choice-symbol">■</div></div>
   </div>
 </div>
 
@@ -48,7 +41,7 @@
   <div class="card center result-card">
     <h2 id="resultTitle"></h2>
     <h1 id="finalScore"></h1>
-    <p id="averageTime"></p>
+    <p id="averageTime" class="avg"></p>
     <p id="bestTime"></p>
     <button id="restartBtn" class="primary full">Spela igen</button>
   </div>
