@@ -45,12 +45,20 @@ times.push(reaction);
 let correct = (currentSymbol==="●" && side==="left") ||
               (currentSymbol==="■" && side==="right");
 
+let half = document.getElementById(side==="left"?"leftHalf":"rightHalf");
+
 if(correct){
 score++;
 document.getElementById("score").textContent=score;
+half.classList.add("correct");
+}else{
+half.classList.add("incorrect");
 }
 
-setTimeout(nextRound,150);
+setTimeout(()=>{
+half.classList.remove("correct","incorrect");
+nextRound();
+},180);
 }
 
 function formatTime(ms){
